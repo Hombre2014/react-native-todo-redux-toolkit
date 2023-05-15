@@ -1,9 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
+import ToDoHeader from './src/components/ToDoHeader';
 
 export default function App() {
+  const RootApp = () => {
+    return (
+      <SafeAreaView>
+        <ToDoHeader />
+      </SafeAreaView>
+    )
+  }
+
   return (
     <View>
-      <Text>Open up App.js to start working on your app!</Text>
+      <RootApp />
     </View>
   );
 }
