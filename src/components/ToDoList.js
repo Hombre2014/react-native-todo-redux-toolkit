@@ -1,23 +1,24 @@
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { deleteTask } from '../redux/taskSlice';
+import { useDispatch } from 'react-redux';
 
 const ToDoList = () => {
-  const data = [
-    {
-      id: 1,
-      title: 'Learn React Native',
-    },
-    {
-      id: 2,
-      title: 'Learn Redux',
-    },
-  ];
+  const todos = useSelector((state) => state.tasks);
+  const dispatch = useDispatch();
+  console.log(todos);
+
+  const deleteItem = (id) => {
+    dispatch(deleteTask({ id }));
+  };
+
 
   const renderItem = ({ item }) => {
     return (
       <View style={styles.item}>
-        <Text style={styles.item}>{item.title}</Text>
+        <Text style={styles.item}>{item.name}</Text>
         <TouchableOpacity
           style={styles.deleteButton}
           onPress={() => {
@@ -33,9 +34,9 @@ const ToDoList = () => {
   return (
     <View>
       <FlatList
-        data={data}
+        data={todos}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
       />
     </View>
   );
